@@ -60,6 +60,7 @@ class Game extends PureComponent {
   makeMove(index){
     console.log(this.props.currentPlayer)
     console.log(this.props.game._id)
+    console.log('index :' , index)
     this.props.makeMove({ userId : this.props.currentPlayer.userId , location : index , gameId : this.props.game._id})
   }
 
@@ -74,23 +75,29 @@ class Game extends PureComponent {
 
     console.log( JSON.stringify(this.props, true, 2) )
 
-    let grid = game.grid.map( (item,index) => {
-      console.log(item)
-       if( game.players[0].userId == item ){
-          return 'x'
-       }
-       if( game.players[1].userId == item ){
-          return '0'
-       }
-    })
-    let turnMessage = '';
-    if(  game.players[game.turn].userId !== this.props.currentPlayer.userId ) {
-      turnMessage = 'its your turn'
-    }
+   let turnMessage = '';
+        let grid = game.grid.map( (item,index) => {
+          console.log('item : ' ,item)
+          if( game.players.length > 1 ) {
+           if( game.players[0].userId == item ){
+              return 'x'
+           }
+           if( game.players[1].userId == item ){
+              return '0'
+           }
+
+
+           if(  game.players[game.turn].userId !== this.props.currentPlayer.userId ) {
+             turnMessage = 'its your turn'
+           }
+         }
+        })
+
+
+
     let renderGrid = grid.map( (item,index) => {
        return <div key={ index} className="grid-cell" onClick={this.makeMove.bind(this,index)}>{ item }</div>
     })
-
     const title = game.players.map(p => (p.name || null))
       .filter(n => !!n)
       .join(' vs ')
@@ -105,7 +112,7 @@ class Game extends PureComponent {
         <div className="grid">
           { renderGrid }
         </div>
-        { turnMessage }
+        { turnMessage  }
         <JoinGameDialog gameId={game._id} />
       </div>
     )
