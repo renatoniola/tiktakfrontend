@@ -1,0 +1,16 @@
+.grid{
+   display : flex;
+   width : 309px;
+   flex-wrap: wrap;
+   box-sizing: border-box;
+}
+
+.grid-cell{
+   width : 100px;
+   height : 100px;
+   line-height : 100px;
+   text-align: center;
+   font-size: 70px;
+   cursor : pointer;
+   border : 1px solid #ececec;
+}
