@@ -79,10 +79,10 @@ class Game extends PureComponent {
         let grid = game.grid.map( (item,index) => {
           console.log('item : ' ,item)
           if( game.players.length > 1 ) {
-           if( game.players[0].userId == item ){
+           if( item == 0 ){
               return 'x'
            }
-           if( game.players[1].userId == item ){
+           if( item  == 1 ){
               return '0'
            }
 
